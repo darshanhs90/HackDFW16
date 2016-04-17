@@ -115,8 +115,8 @@ window.location.href="student-index.html#work";
 }
 
 $scope.users=[];
-$scope.users.push({'emailid':'','id':'0','emailid':'sxn146630@utdallas.edu','image':'images/sreesha.jpg','name':'Sreesha N','university':'UT Dallas','rating':'4','reviews':'I am really annoyed with your poor performance recently','img':'images/darshan.jpg'})
-$scope.users.push({'emailid':'','id':'1','emailid':'hsdars@gmail.com','image':'images/darshan.jpg','name':'Darshan HS','university':'UT Dallas','rating':'3','reviews':'Hey, good job with that thing you did recently','img':'images/newone.jpg'})
+$scope.users.push({'phone':'14694509828','emailid':'','id':'0','emailid':'sxn146630@utdallas.edu','image':'images/sreesha.jpg','name':'Sreesha N','university':'UT Dallas','rating':'4','reviews':'I am really annoyed with your poor performance recently','img':'images/darshan.jpg'})
+$scope.users.push({'phone':'14694509829','emailid':'','id':'1','emailid':'hsdars@gmail.com','image':'images/darshan.jpg','name':'Darshan HS','university':'UT Dallas','rating':'3','reviews':'Hey, good job with that thing you did recently','img':'images/newone.jpg'})
 $scope.users.push({'emailid':'','id':'2','emailid':'sxn146630@utdallas.edu','image':'images/bhargavi.jpg','name':'Bhargavi R','university':'UT Dallas','rating':'5','reviews':'I am really annoyed with your poor performance recently','img':'images/sreesha.jpg'})
 $scope.users.push({'emailid':'','id':'3','emailid':'sxn146630@utdallas.edu','image':'images/shivu.jpg','name':'Shivu G','university':'UT Dallas','rating':'2','reviews':'Hey, good job with that thing you did recently','img':'images/newone2.jpg'})
 $scope.users.push({'emailid':'','id':'4','emailid':'sxn146630@utdallas.edu','image':'images/newone.jpg','name':'Ritu P','university':'UT Dallas','rating':'5','reviews':'I am really annoyed with your poor performance recently','img':'images/shivu.jpg'})
@@ -133,6 +133,7 @@ $scope.openModal=function($val)
 	$scope.avg='';
 	$scope.user=$scope.users[$val];
 	$scope.userUniv=serverId;
+	$scope.verifier=false;
 	$("#btnmodal").click();
 }
 
@@ -160,9 +161,9 @@ $scope.makeVideoCall=function($val){
 }
 
 $scope.makeAudioCall=function($val){
-	$http.get('http://localhost:1337/sendSMS?ph='+$scope.users[$val].phone+'&msg=Join+the+bridge+13176590432').success(function(res){
-		$http.get('http://localhost:1337/sendSMS?ph=14697672278&msg=Join+the+bridge+13176590432').success(function(res){
-			console.log(res);
+	$http.get('http://localhost:1337/sendSMS?ph='+$scope.users[$val].phone+'&msg=Join+the+bridge+13176590432.+conferenceID+1337').success(function(res){
+		$http.get('http://localhost:1337/sendSMS?ph=14697672278&msg=Join+the+bridge+13176590432.+conferenceID+1337').success(function(res){
+			alertify.success('Join the bridge with conference id 1337');
 		})
 	})
 }

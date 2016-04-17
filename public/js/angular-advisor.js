@@ -111,6 +111,19 @@ app.controller('myCtrl',function($scope,$http) {
 		})
 
 	}
+
+		$scope.signUp=function(){
+		alertify.success('Sign Up succesful');
+		$scope.resume=false;
+		$scope.form=true;
+	}
+	$scope.showLoad=false;
+	$scope.signIn=function(){
+		alertify.success('Signed in succesfully, you are placed in UT Dallas room');
+		$scope.showLoad=true;
+		window.location.href="index.html#two";
+	}
+
 	/*$("div.star-rating > s, div.star-rating-rtl > s").on("click", function(e) {
 		var numStars = $(e.target).parentsUntil("div").length+1;
 		alert(numStars + (numStars == 1 ? " star" : " stars!"));
