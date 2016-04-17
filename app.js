@@ -173,6 +173,42 @@ app.get('/predictor',function(reqst,respns){
 });
 
 
+app.get('/videoCall',function(reqst,respns){
+	var sip=reqst.query.sip;
+	sip="82921369@ciscospark.com";
+	request('https://api.tropo.com/1.0/sessions?action=create&token=436e6379527861734f776f444e4b5a4b43675378484959496b4442466f4e515167575678694a595248454862&actionPerform=1&sip='+sip,function(err,res,body){
+		respns.send(body);
+		respns.end();
+	});
+});
+
+
+
+app.get('/sendSMS',function(reqst,respns){
+	var ph=reqst.query.ph;
+	var msg=reqst.query.msg;//"some msg";
+	console.log(ph);
+	console.log(msg);
+	
+	//ph=14697672278
+	request('https://api.tropo.com/1.0/sessions?action=create&token=436e6379527861734f776f444e4b5a4b43675378484959496b4442466f4e515167575678694a595248454862&actionPerform=2&ph='+ph+'&msg='+msg,function(err,res,body){
+		respns.send(body);
+		respns.end();
+	});
+});
+
+
+var num=parseInt(Math.random()*10000);
+console.log(num);
+app.get('/verifyPh',function(reqst,respns){
+	var ph=reqst.query.ph;
+	var msg=num;
+	request('https://api.tropo.com/1.0/sessions?action=create&token=436e6379527861734f776f444e4b5a4b43675378484959496b4442466f4e515167575678694a595248454862&actionPerform=2&ph='+ph+'&msg='+msg,function(err,res,body){
+		respns.send(body);
+		respns.end();
+	});
+});
+
 
 
 //Person class
@@ -283,6 +319,11 @@ app.get('/getListOfMembersInRoom',function(req,resp){
     			 resp.end();
   				}
 			});
-		});
+});
+
+
+
+
+
 
 
