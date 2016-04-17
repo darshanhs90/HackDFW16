@@ -69,12 +69,12 @@ app.controller('myCtrl',function($scope,$http) {
 	}
 
 $scope.users=[];
-$scope.users.push({'emailid':'','id':'0','name':'Sreesha N','university':'UT Dallas','rating':'4','reviews':'I am really annoyed with your poor performance recently','img':'images/darshan.jpg'})
-$scope.users.push({'emailid':'','id':'1','name':'Darshan HS','university':'UT Dallas','rating':'3','reviews':'Hey, good job with that thing you did recently','img':'images/newone.jpg'})
-$scope.users.push({'emailid':'','id':'2','name':'Bhargavi R','university':'UT Dallas','rating':'5','reviews':'I am really annoyed with your poor performance recently','img':'images/sreesha.jpg'})
-$scope.users.push({'emailid':'','id':'3','name':'Shivu G','university':'UT Dallas','rating':'2','reviews':'Hey, good job with that thing you did recently','img':'images/newone2.jpg'})
-$scope.users.push({'emailid':'','id':'4','name':'Ritu P','university':'UT Dallas','rating':'5','reviews':'I am really annoyed with your poor performance recently','img':'images/shivu.jpg'})
-$scope.users.push({'emailid':'','id':'5','name':'NoName','university':'UT Dallas','rating':'4','reviews':'Hey, good job with that thing you did recently','img':'images/bhargavi.jpg'})
+$scope.users.push({'phone':'14694509828','emailid':'sxn146630@utdallas.edu','id':'0','name':'Sreesha N','university':'UT Dallas','rating':'4','reviews':'I am really annoyed with your poor performance recently','img':'images/darshan.jpg'})
+$scope.users.push({'phone':'14694509829','emailid':'hsdars@gmail.com','id':'1','name':'Darshan HS','university':'UT Dallas','rating':'3','reviews':'Hey, good job with that thing you did recently','img':'images/newone.jpg'})
+$scope.users.push({'phone':'','emailid':'','id':'2','name':'Bhargavi R','university':'UT Dallas','rating':'5','reviews':'I am really annoyed with your poor performance recently','img':'images/sreesha.jpg'})
+$scope.users.push({'phone':'','emailid':'','id':'3','name':'Shivu G','university':'UT Dallas','rating':'2','reviews':'Hey, good job with that thing you did recently','img':'images/newone2.jpg'})
+$scope.users.push({'phone':'','emailid':'','id':'4','name':'Ritu P','university':'UT Dallas','rating':'5','reviews':'I am really annoyed with your poor performance recently','img':'images/shivu.jpg'})
+$scope.users.push({'phone':'','emailid':'','id':'5','name':'NoName','university':'UT Dallas','rating':'4','reviews':'Hey, good job with that thing you did recently','img':'images/bhargavi.jpg'})
 $scope.usersNew='';
 $scope.userRating='';
 $scope.userUniv='';
@@ -97,7 +97,7 @@ $scope.makeVideoCall=function($val){
 	var sipId='',Id='';
 	$http.get('http://localhost:1337/createRoom?title=videoCall').success(function(res){
 		Id=res.id;
-		$http.get('http://localhost:1337/addPersonToRoom?roomID='Id+'email=hsdars@gmail.com').success(function(r){
+		$http.get('http://localhost:1337/addPersonToRoom?roomID='+Id+'email=hsdars@gmail.com').success(function(r){
 			$http.get('http://localhost:1337/getRoomDetails?roomid='+Id).success(function(res1){
 				sipId=res1.id;
 					$http.get('http://localhost:1337/videoCall?sip='+sipId).success(function(res3){
@@ -106,12 +106,8 @@ $scope.makeVideoCall=function($val){
 			})
 			})
 	})
-
-
-
-
-
 }
+
 $scope.makeAudioCall=function($val){
 
 	$http.get('http://localhost:1337/sendSMS?ph=14697672278&msg=Join+the+bridge+13176590432').success(function(res){
