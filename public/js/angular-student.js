@@ -99,6 +99,7 @@ break;
 				}
 			};
 			$http.get('http://localhost:1337/getListOfMembersInRoom?roomID='+roomId).success(function(res1){
+				console.log('members in room');
 				console.log(res1);
 			})
 		})
