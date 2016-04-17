@@ -56,6 +56,9 @@ app.controller('myCtrl',function($scope,$http) {
 	var serverId;
 	$scope.getList=function(){
 		serverId=document.getElementById('select_path').value;
+		//get list of university names
+		//get members corresponding to a specific roomid
+
 		/*$http.get('http://localhost:1337/getAdvisors?univname='+serverId)
 			.success(function(res){
 				console.log(res);
@@ -66,12 +69,12 @@ app.controller('myCtrl',function($scope,$http) {
 	}
 
 $scope.users=[];
-$scope.users.push({'id':'0','name':'Sreesha N','university':'UT Dallas','rating':'4','reviews':'I am really annoyed with your poor performance recently','img':'images/darshan.jpg'})
-$scope.users.push({'id':'1','name':'Darshan HS','university':'UT Dallas','rating':'3','reviews':'Hey, good job with that thing you did recently','img':'images/newone.jpg'})
-$scope.users.push({'id':'2','name':'Bhargavi R','university':'UT Dallas','rating':'5','reviews':'I am really annoyed with your poor performance recently','img':'images/sreesha.jpg'})
-$scope.users.push({'id':'3','name':'Shivu G','university':'UT Dallas','rating':'2','reviews':'Hey, good job with that thing you did recently','img':'images/newone2.jpg'})
-$scope.users.push({'id':'4','name':'Ritu P','university':'UT Dallas','rating':'5','reviews':'I am really annoyed with your poor performance recently','img':'images/shivu.jpg'})
-$scope.users.push({'id':'5','name':'NoName','university':'UT Dallas','rating':'4','reviews':'Hey, good job with that thing you did recently','img':'images/bhargavi.jpg'})
+$scope.users.push({'emailid':'','id':'0','name':'Sreesha N','university':'UT Dallas','rating':'4','reviews':'I am really annoyed with your poor performance recently','img':'images/darshan.jpg'})
+$scope.users.push({'emailid':'','id':'1','name':'Darshan HS','university':'UT Dallas','rating':'3','reviews':'Hey, good job with that thing you did recently','img':'images/newone.jpg'})
+$scope.users.push({'emailid':'','id':'2','name':'Bhargavi R','university':'UT Dallas','rating':'5','reviews':'I am really annoyed with your poor performance recently','img':'images/sreesha.jpg'})
+$scope.users.push({'emailid':'','id':'3','name':'Shivu G','university':'UT Dallas','rating':'2','reviews':'Hey, good job with that thing you did recently','img':'images/newone2.jpg'})
+$scope.users.push({'emailid':'','id':'4','name':'Ritu P','university':'UT Dallas','rating':'5','reviews':'I am really annoyed with your poor performance recently','img':'images/shivu.jpg'})
+$scope.users.push({'emailid':'','id':'5','name':'NoName','university':'UT Dallas','rating':'4','reviews':'Hey, good job with that thing you did recently','img':'images/bhargavi.jpg'})
 $scope.usersNew='';
 $scope.userRating='';
 $scope.userUniv='';
@@ -88,9 +91,12 @@ $scope.openModal=function($val)
 }
 
 $scope.makeVideoCall=function($val){
-
+	//create room
+	//add me and other person to that room
+	//get sip of that room
 	$http.get('http://localhost:1337/videoCall?sip=1').success(function(res){
 		window.location.href="https://web.ciscospark.com/#/rooms/8d2596e0-0340-11e6-b0ef-05795347c21f";
+		//delete that room
 	})
 
 
