@@ -122,16 +122,12 @@
 				</div>
 				<div class="modal-body">
 					<label>University <i class="fa fa-university"></i> </label>{{userUniv}}<br/>
-					<label>Rating :</label>{{userRating}}<br/>
+					<label>Rating :</label>{{user.rating}}<br/>
 					<div><label>Reviews:</label><br/></div>
 					<div contentEditable="false" style="width: 550px;height: 70px;border: 1px solid #000;border-radius:15px;">
 						<img ng-src="{{user.img}}" style="height: 70px;border: 1px solid #000;border-radius:15px;"/>
 						&nbsp;{{user.reviews}}
 					</div>
-					<br/>
-					<button ng-click="getAvgReviewScore(user.id)" class="btn btn-sm btn-info" style="border-radius:10px;">Get Avg Review Score
-					</button>
-					<span ng-show="avg!=''" style="font: italic bold 20px Georgia, serif;"><strong>{{avg}}</strong></span>
 				</div>
 				<div class="modal-footer">
 					<button type="button" class="btn btn-default" data-dismiss="modal">Close</button>
@@ -224,61 +220,71 @@
 	<!-- One -->
 	<section id="one" class="main style2 right dark fullscreen">
 		<div class="content box style2" style="left:20px;width:1350px;background:transparent">
-				<button>
-					Sign Up
-				</button>
+			<button ng-click="showResume('0')" ng-hide="resume||form">
+				Sign Up
+			</button>
 
-				<button>
-					Sign In
-				</button>
-				
+			<button ng-click="showResume('1')" ng-hide="resume||form">
+				Sign In
+			</button>
+			<div ng-show="resume">
 				<form class="form-inline">
 					<div class="form-group">
 						<label for="exampleInputName2">Name</label>
-						<input type="text" class="form-control" id="exampleInputName2" placeholder="Jane Doe">
+						<input type="text" class="form-control" id="exampleInputName2" placeholder="Enter Name">
 					</div>
 					<div class="form-group">
 						<label for="exampleInputEmail2">Age</label>
-						<input type="email" class="form-control" id="exampleInputEmail2" placeholder="jane.doe@example.com">
+						<input type="number" class="form-control" id="exampleInputEmail2" placeholder="Enter Age">
 					</div>
 				</form>
 				<form class="form-inline">
 					<div class="form-group">
 						<label for="exampleInputName2"> Email</label>
-						<input type="number" class="form-control" id="exampleInputName2" placeholder="130-170">
+						<input type="text" class="form-control" id="exampleInputName2" placeholder="jane.doe@example.com">
+					</div>
+					<div class="form-group">
+						<label for="exampleInputEmail2"> Password</label>
+						<input type="text" class="form-control" id="exampleInputEmail2" placeholder="********">
+					</div>
+				</form>
+				<form class="form-inline">
+					<div class="form-group">
+						<label for="exampleInputName2">University Name</label>
+						<input type="text" class="form-control" id="exampleInputName2" placeholder="Enter University Name">
 					</div>
 					<div class="form-group">
 						<label for="exampleInputEmail2"> GPA</label>
-						<input type="number" class="form-control" id="exampleInputEmail2" placeholder="130-170">
-					</div>
-				</form>
-				<form class="form-inline">
-					<h5>Toefl Score</h5>
-					<div class="form-group">
-						<label for="exampleInputName2">Reading</label>
-						<input type="number" class="form-control" id="exampleInputName2" placeholder="0-30">
+						<input type="text" class="form-control" id="exampleInputEmail2" placeholder="Enter GPA">
 					</div>
 				</form>
 
 				<form class="form-inline">
-					<h5>Most Recent Education Info</h5>
 					<div class="form-group">
-						<label for="exampleInputName2">Degree</label>
-						<input type="text" class="form-control" id="exampleInputName2" placeholder="Bachelors">
+						<label for="exampleInputName2">Location</label>
+						<input type="text" class="form-control" id="exampleInputName2" placeholder="Location">
 					</div>
-					<div class="form-group">
-						<label for="exampleInputName2">University</label>
-						<input type="text" class="form-control" id="exampleInputName2" placeholder="Annamma University">
-					</div>
-					<span>&nbsp;&nbsp;&nbsp;</span>
-					<div class="form-group">
-						<label for="exampleInputName2">GPA</label>
-						<input type="number" class="form-control" id="exampleInputName2" placeholder="0-4">
-					</div>
+				</form>
 				<br/>
-				<button class="btn btn-submit" ng-click="submitDetails()"> Submit Details</button>
+				<button class="btn btn-submit" ng-click="signUp()"> Sign Up </button>
 			</div>
 
+
+			<div ng-show="form">
+				<form class="form-inline">
+					<div class="form-group">
+						<label for="exampleInputName2"> Email</label>
+						<input type="text" class="form-control" id="exampleInputName2" placeholder="jane.doe@example.com">
+					</div>
+					<div class="form-group">
+						<label for="exampleInputEmail2"> Password</label>
+						<input type="number" class="form-control" id="exampleInputEmail2" placeholder="********">
+					</div>
+				</form>
+
+				<br/>
+				<button class="btn btn-submit" ng-click="signIn()">LogIn </button>
+			</div>
 
 		</div>
 		<a href="#two" class="button style2 down anchored">Next</a>
@@ -291,7 +297,7 @@
 				<h2>Choose Your Target University</h2>
 			</header>
 			<p>
-				<select class="selectpicker" data-live-search="true" style="position:fixed;height:40px">
+				<select class="selectpicker" id="select_path" data-live-search="true" style="position:fixed;height:40px">
 					<option ng-repeat="x in collegenames">{{x}}</option>
 				</select>
 				<button class="btn btn-submit" ng-click="getList()">Get Advisors List</button>
@@ -313,7 +319,7 @@
 					<div class="6u 12u(mobile)">
 						<div class="image fit from-left divbutton" style="background-image:url('images/sreesha.jpg');background-size: contain;background-repeat:no-repeat;height:250px;width:435px;background-position: center; ">
 							<button style="display:none;" ng-click="makeVideoCall(0)"><i class="fa fa-video-camera"></i></button>
-							<button style="display:none;"><i class="fa fa-phone"></i></button>
+							<button style="display:none;" ng-click="makeAudioCall(0)"><i class="fa fa-phone"></i></button>
 							<div class="star-rating" style="display:none;"><s class="rated"><s class="rated"><s class="rated"><s class="rated"><s ></s></s></s></s></s></div>
 							<button style="display:none;"  ng-click="openModal('0')"><i class="fa fa-user"></i></button>
 						</div>
@@ -321,7 +327,7 @@
 					<div class="6u 12u(mobile)" >
 						<div class="image fit from-right divbutton" style="background-image:url('images/darshan.jpg');background-size: 100% 100%;background-repeat:no-repeat;height:250px;width:435px;background-position: center; ">
 							<button style="display:none;" ng-click="makeVideoCall(1)"><i class="fa fa-video-camera"></i></button>
-							<button style="display:none;"><i class="fa fa-phone"></i></button>
+							<button style="display:none;" ng-click="makeAudioCall(1)"><i class="fa fa-phone"></i></button>
 							<div class="star-rating" style="display:none;"><s class="rated"><s class="rated"><s class="rated"><s class=""><s ></s></s></s></s></s></div>
 							<button style="display:none;" ng-click="openModal('1')"><i class="fa fa-user"></i></button>
 						</div>
@@ -331,7 +337,7 @@
 					<div class="6u 12u(mobile)">
 						<div class="image fit from-left divbutton" style="background-image:url('images/bhargavi.jpg');background-size: 100% 100%;background-repeat:no-repeat;height:250px;width:435px;background-position: center; ">
 							<button style="display:none;" ng-click="makeVideoCall(2)"><i class="fa fa-video-camera"></i></button>
-							<button style="display:none;" ng-click="makeVideoCall()"><i class="fa fa-phone"></i></button>
+							<button style="display:none;" ng-click="makeAudioCall(2)"><i class="fa fa-phone"></i></button>
 							<div class="star-rating" style="display:none;"><s class="rated"><s class="rated"><s class="rated"><s class="rated"><s class="rated"></s></s></s></s></s></div>
 							<button style="display:none;" ng-click="openModal('2')"><i class="fa fa-user"></i></button>
 						</div>
@@ -339,7 +345,7 @@
 					<div class="6u 12u(mobile)">
 						<div class="image fit from-right divbutton" style="background-image:url('images/shivu.jpg');background-size: 100% 100%;background-repeat:no-repeat;height:250px;width:435px;background-position: center; ">
 							<button style="display:none;" ng-click="makeVideoCall(3)"><i class="fa fa-video-camera"></i></button>
-							<button style="display:none;" ng-click="makeVideoCall()"><i class="fa fa-phone"></i></button>
+							<button style="display:none;" ng-click="makeAudioCall(3)"><i class="fa fa-phone"></i></button>
 							<div class="star-rating" style="display:none;"><s class="rated"><s class="rated"><s class=""><s class=""><s ></s></s></s></s></s></div>
 							<button style="display:none;" ng-click="openModal('3')"><i class="fa fa-user"></i></button>
 						</div>
@@ -349,7 +355,7 @@
 					<div class="6u 12u(mobile)">
 						<div class="image fit from-left divbutton" style="background-image:url('images/newone.jpg');background-size: 100% 100%;background-repeat:no-repeat;height:250px;width:435px;background-position: center; ">
 							<button style="display:none;" ng-click="makeVideoCall(4)"><i class="fa fa-video-camera"></i></button>
-							<button style="display:none;" ng-click="makeVideoCall()"><i class="fa fa-phone"></i></button>
+							<button style="display:none;" ng-click="makeAudioCall(4)"><i class="fa fa-phone"></i></button>
 							<div class="star-rating" style="display:none;"><s class="rated"><s class="rated"><s class="rated"><s class="rated"><s class='rated'></s></s></s></s></s></div>
 							<button style="display:none;" ng-click="openModal('4')"><i class="fa fa-user"></i></button>
 						</div>
@@ -357,7 +363,7 @@
 					<div class="6u 12u(mobile)">
 						<div class="image fit from-right divbutton" style="background-image:url('images/newone2.jpg');background-size: 100% 100%;background-repeat:no-repeat;height:250px;width:435px;background-position: center; ">
 							<button style="display:none;" ng-click="makeVideoCall(5)"><i class="fa fa-video-camera"></i></button>
-							<button style="display:none;" ng-click="makeVideoCall()"><i class="fa fa-phone"></i></button>
+							<button style="display:none;" ng-click="makeAudioCall(5)"><i class="fa fa-phone"></i></button>
 							<div class="star-rating" style="display:none;"><s class="rated"><s class="rated"><s class="rated"><s class="rated"><s ></s></s></s></s></s></div>
 							<button style="display:none;" ng-click="openModal('5')"><i class="fa fa-user"></i></button>
 						</div>
