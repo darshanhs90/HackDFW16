@@ -228,7 +228,6 @@ app.get('/createUser',function(req,resp){
 });
 
 
-
 });
 
 //get user by name
@@ -284,4 +283,4 @@ app.get('/getListOfMembersInRoom',function(req,resp){
 			});
 		});
 
-});
+
