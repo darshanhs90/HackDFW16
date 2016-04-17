@@ -214,6 +214,21 @@ app.get('/createUser',function(req,resp){
 	var person = new PersonMain(name, email, age, gpa, univName, language);
 	persons.push(person);
 
+	// id is same as univName ; since we don't know the room id when the user selects the university
+	var room_this = sparky.room.get(univName, function(err, results) {
+  if(!err) {
+    console.log(results);
+  }
+});
+
+	var membership_obj = sparky.membership.add(room_this.id, email, function(err, results) {
+  if(!err) {
+    console.log(results);
+  }
+});
+
+
+
 });
 
 //get user by name
