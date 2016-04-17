@@ -173,6 +173,23 @@ app.get('/predictor',function(reqst,respns){
 });
 
 
+var collegenames=["The University of Texas at Austin",
+	"The University of Texas at Dallas",
+	"The University of Texas at Arlington",
+	"University of California-Berkeley",
+	"University of Colorado Boulder",
+	"Virginia Polytechnic Institute and State University"];
+
+//add rooms
+collegenames.forEach(function(coll){
+  
+  sparky.room.add(coll, function(err, results) {
+  if(!err) {
+    console.log(results);
+  }
+});
+});
+
 app.get('/videoCall',function(reqst,respns){
 	var sip=reqst.query.sip;
 	//86633293@ciscospark.com
