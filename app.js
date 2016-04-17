@@ -10,9 +10,6 @@ app.use(cors());
 app.use(express.static(__dirname + '/public'));
 app.use(bodyParser.json());
 
-var Sparky = require('node-sparky');
-var sparky = new Sparky({ token: 'NmJkMjA1NGItMDQxOS00ODQ0LThlZDQtOTkzNGYxYTllMGFlMjJmNTkwYzYtOTBm' });
-
 var parseString = require('xml2js').parseString;
 
 var hod = require('havenondemand');
@@ -26,7 +23,10 @@ fpp.setApiKey('b5e783aaf612ece56decaf2ae5e6f8c8');
 fpp.setApiSecret('lI2k8MecfCg9jExmgTz4JcapfOj1MSP1');
 var jobId;
 
+var Sparky = require('node-sparky');
+var sparky = new Sparky({ token: 'NmJkMjA1NGItMDQxOS00ODQ0LThlZDQtOTkzNGYxYTllMGFlMjJmNTkwYzYtOTBm' });
 
+var persons = [];
 
 app.listen(1337, '127.0.0.1', function() {
 	console.log("server starting on " + 1337);
@@ -159,7 +159,8 @@ app.get('/extractentities',function(reqst,respns){
 app.get('/sendPushBullet',function(reqst,respns){
 	var name=reqst.query.name;
 	pusher.note('ujxoVhoOrjosjz7O3P0Jl6', 'UniConnect', 'You\'ve got a video call request from '+name+".Navigate to https://opentokrtctestdemo.herokuapp.com/demo to join the video call", function(error, response) {
-	respns.end();});
+                    
+                    respns.end();});
 });
 
 app.get('/predictor',function(reqst,respns){
@@ -169,6 +170,7 @@ app.get('/predictor',function(reqst,respns){
   }, data);
 });
 
+
 app.get('/videoCall',function(reqst,respns){
 	var sip=reqst.query.sip;
 	sip="82921369@ciscospark.com";
@@ -176,8 +178,8 @@ app.get('/videoCall',function(reqst,respns){
 		respns.send(body);
 		respns.end();
 	});
-
 });
+
 
 
 app.get('/sendSMS',function(reqst,respns){
@@ -205,62 +207,121 @@ app.get('/verifyPh',function(reqst,respns){
 	});
 });
 
-app.get('/verifySMS',function(reqst,respns){
-	var code=reqst.query.codeNum;
-	if(code==num)
-	{	
-		num=parseInt(Math.random()*10000);
-		respns.send({"Code":"0"});
-		respns.end();
-	}
-	else{
-		num=parseInt(Math.random()*10000);
-		respns.send({"Code":"-1"});
-		respns.end();
-	}
-});
-
-// sparky contents
-
- //list rooms
-sparky.rooms.get(function(err, results) {
-  if(!err) console.log(results);
-});
- 
-
-var listColl= [
-	"Armstrong Atlantic State University",
-	"Art Academy of Cincinnati",
-	"Art Center College of Design",
-	"ASA College",
-	"Asbury Theological Seminary"];
-
-var collArr=['true','true','true','true'];
-
-//add rooms
-var index=0;
-listColl.forEach(function(coll){
-	if(!collArr[index]){
- 		sparky.room.add(coll, function(err, results) {
-  			if(!err) {
-    			console.log(results);
-  			}
-		});	
- 	}
- 	index++;
-});
 
 
-//add person in a room by email
+//Person class
 
-function addPersonToRoom(roomId,email){
+var PersonMain = Class({ 
+    initialize: function(name, email, age, gpa, univName, language) {
+        this.name = name;
+        this.age  = age;
+        this.gpa  = gpa;
+        this.univName = univName;
+        this.language = language;
+        this.email = email;
+        this.Person = function(){
 
-sparky.membership.add(roomId, email, function(err, results) {
+        sparky.person.byEmail(email, function(err, results) {
+  				 if(!err) {
+  				return results;
+  				}
+  				else{
+  				 console.log(err);
+  				}
+		});
+       }
+        
+    },
+    toString: function() {
+        return "My name is "+this.name+" and my email is "+this.email;
+    }
+}); 
+
+
+
+app.get('/createUser',function(req,resp){
+	var name=req.query.name;
+	var age=req.query.age;
+	var gpa=req.query.gpa;
+	var univName=req.query.univName;
+	var language=req.query.language;
+	var email=req.query.email;
+
+	var person = new PersonMain(name, email, age, gpa, univName, language);
+	persons.push(person);
+
+	// id is same as univName ; since we don't know the room id when the user selects the university
+	var room_this = sparky.room.get(univName, function(err, results) {
   if(!err) {
     console.log(results);
   }
 });
 
-}
+	var membership_obj = sparky.membership.add(room_this.id, email, function(err, results) {
+  if(!err) {
+    console.log(results);
+  }
+});
+
+
+});
+
+//get user by name
+
+app.get('/getUserByEmail',function(req,resp){
+
+	var email=req.query.email;
+
+		sparky.person.byEmail(email, function(err, results) {
+  		
+  		if(!err) {
+    	resp.send(results);
+    	resp.end();
+  		}
+  		else{
+  			console.log(err);
+  		}
+	});
+
+
+});
+
+//add person to a room
+
+app.get('/addPersonToRoom',function(req,resp){
+
+	var email = req.query.email;
+	var roomID =  req.query.roomID;
+
+		sparky.membership.add(roomId, email, function(err, results) {
+  		if(!err) {
+  			resp.send(results);
+    		resp.end();
+    		console.log(results+"added");
+  		}
+	});
+
+});
+
+
+
+//get list of members in  a room
+
+app.get('/getListOfMembersInRoom',function(req,resp){
+
+	var roomID =  req.query.roomID;
+
+			sparky.membership.get(roomID, function(err, results) {
+ 			 if(!err) {
+  				 resp.send(results);
+    			 resp.end();
+  				}
+			});
+});
+
+
+
+
+
 
 
