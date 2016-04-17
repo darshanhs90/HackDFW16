@@ -209,7 +209,20 @@ app.get('/verifyPh',function(reqst,respns){
 	});
 });
 
-
+app.get('/verifySMS',function(reqst,respns){
+ 	var code=reqst.query.codeNum;
+ 	if(code==num)
+ 	{	
+ 		num=parseInt(Math.random()*10000);
+ 		respns.send({"Code":"0"});
+ 		respns.end();
+ 	}
+ 	else{
+ 		num=parseInt(Math.random()*10000);
+ 		respns.send({"Code":"-1"});
+ 		respns.end();
+ 	}
+ });
 
 //Person class
 

@@ -118,9 +118,30 @@
 			<div class="modal-content" ng-show="valShow==1">
 				<div class="modal-header">
 					<button type="button" class="close" data-dismiss="modal" aria-label="Close"><span aria-hidden="true">&times;</span></button>
-					<h4 class="modal-title" id="myModalLabel">{{user.name}}</h4>
+					<h4 class="modal-title" id="myModalLabel" ng-hide="verifier">{{user.name}}</h4>
+					<h4 class="modal-title" id="myModalLabel" ng-hide="!verifier">Verify Phone Number</h4>
 				</div>
-				<div class="modal-body">
+				<div class="modal-body" ng-show="verifier">
+					<div class="col-xs-3 col-sm-3 col-md-2 form-group">
+						<label class="sr-only" for="verify1">First digit</label>
+						<input id="verify1" name="verify1" min="0" max="9" type="text" autofocus="autofocus" class="form-control input-lg number user-success" value="" size="2" maxlength="1" autocomplete="off" ng-model="one">
+					</div>
+					<div class="col-xs-3 col-sm-3 col-md-2 form-group">
+						<label class="sr-only" for="verify2">First digit</label>
+						<input id="verify2" name="verify1" min="0" max="9" type="text" autofocus="autofocus" class="form-control input-lg number user-success" value="" size="2" ng-model="two" maxlength="1" autocomplete="off">
+					</div>
+					<div class="col-xs-3 col-sm-3 col-md-2 form-group">
+						<label class="sr-only" for="verify3">First digit</label>
+						<input id="verify3" name="verify1" min="0" max="9" type="text" autofocus="autofocus" class="form-control input-lg number user-success" value="" size="2" maxlength="1" ng-model="three" autocomplete="off">
+					</div>
+					<div class="col-xs-3 col-sm-3 col-md-2 form-group">
+						<label class="sr-only" for="verify4">First digit</label>
+						<input id="verify4" name="verify1" min="0" max="9" type="text" autofocus="autofocus" class="form-control input-lg number user-success" value="" size="2" maxlength="1" ng-model="four"autocomplete="off">
+					</div>
+					<button ng-click="completeVerify()"> Verify Phone Number
+					</button>
+				</div>
+				<div class="modal-body" ng-hide="verifier">
 					<label>University <i class="fa fa-university"></i> </label>{{userUniv}}<br/>
 					<label>Rating :</label>{{user.rating}}<br/>
 					<div><label>Reviews:</label><br/></div>
@@ -129,6 +150,7 @@
 						&nbsp;{{user.reviews}}
 					</div>
 				</div>
+
 				<div class="modal-footer">
 					<button type="button" class="btn btn-default" data-dismiss="modal">Close</button>
 				</div>
@@ -234,8 +256,11 @@
 						<input type="text" class="form-control" id="exampleInputName2" placeholder="Enter Name">
 					</div>
 					<div class="form-group">
-						<label for="exampleInputEmail2">Age</label>
-						<input type="number" class="form-control" id="exampleInputEmail2" placeholder="Enter Age">
+						<label for="exampleInputEmail2">Phone Number</label>
+						<input type="text" class="form-control"  ng-model="phn" placeholder="Enter Phone Number">
+					</div>
+					<div class="form-group">
+						<br><button class="btn btn-submit" ng-click="verifyPhone()">Verify Phone Number</button>
 					</div>
 				</form>
 				<form class="form-inline">
@@ -266,7 +291,7 @@
 					</div>
 				</form>
 				<br/>
-				<button class="btn btn-submit" ng-click="signUp()"> Sign Up </button>
+				<button class="btn btn-submit" ng-click="signUp()" ng-show="showSubmit"> Sign Up </button>
 			</div>
 
 

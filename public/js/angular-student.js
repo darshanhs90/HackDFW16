@@ -24,6 +24,7 @@ app.controller('myCtrl',function($scope,$http) {
 		window.location.href="student-index.html#two";
 	}
 	$scope.rating=3;
+	$scope.verifier=false;
 	$scope.getClass=function($val)
 	{
 		switch($val){
@@ -59,47 +60,74 @@ app.controller('myCtrl',function($scope,$http) {
 			.success(function(res){
 				console.log(res);
 			});*/
-		window.location.href="student-index.html#work";
-	}
+window.location.href="student-index.html#work";
+}
 
-	$scope.users=[];
-	$scope.users.push({'id':'0','name':'Sreesha N','university':'UT Dallas','rating':'4','reviews':'I am really annoyed with your poor performance recently','img':'images/darshan.jpg'})
-	$scope.users.push({'id':'1','name':'Darshan HS','university':'UT Dallas','rating':'3','reviews':'Hey, good job with that thing you did recently','img':'images/newone.jpg'})
-	$scope.users.push({'id':'2','name':'Bhargavi R','university':'UT Dallas','rating':'5','reviews':'I am really annoyed with your poor performance recently','img':'images/sreesha.jpg'})
-	$scope.users.push({'id':'3','name':'Shivu G','university':'UT Dallas','rating':'2','reviews':'Hey, good job with that thing you did recently','img':'images/newone2.jpg'})
-	$scope.users.push({'id':'4','name':'Ritu P','university':'UT Dallas','rating':'5','reviews':'I am really annoyed with your poor performance recently','img':'images/shivu.jpg'})
-	$scope.users.push({'id':'5','name':'NoName','university':'UT Dallas','rating':'4','reviews':'Hey, good job with that thing you did recently','img':'images/bhargavi.jpg'})
-	$scope.usersNew='';
-	$scope.userRating='';
-	$scope.userUniv='';
-	$scope.userName='';
+$scope.users=[];
+$scope.users.push({'id':'0','name':'Sreesha N','university':'UT Dallas','rating':'4','reviews':'I am really annoyed with your poor performance recently','img':'images/darshan.jpg'})
+$scope.users.push({'id':'1','name':'Darshan HS','university':'UT Dallas','rating':'3','reviews':'Hey, good job with that thing you did recently','img':'images/newone.jpg'})
+$scope.users.push({'id':'2','name':'Bhargavi R','university':'UT Dallas','rating':'5','reviews':'I am really annoyed with your poor performance recently','img':'images/sreesha.jpg'})
+$scope.users.push({'id':'3','name':'Shivu G','university':'UT Dallas','rating':'2','reviews':'Hey, good job with that thing you did recently','img':'images/newone2.jpg'})
+$scope.users.push({'id':'4','name':'Ritu P','university':'UT Dallas','rating':'5','reviews':'I am really annoyed with your poor performance recently','img':'images/shivu.jpg'})
+$scope.users.push({'id':'5','name':'NoName','university':'UT Dallas','rating':'4','reviews':'Hey, good job with that thing you did recently','img':'images/bhargavi.jpg'})
+$scope.usersNew='';
+$scope.userRating='';
+$scope.userUniv='';
+$scope.userName='';
 
 
-	$scope.openModal=function($val)
-	{   
-		$scope.valShow=1;
-		$scope.avg='';
-		$scope.user=$scope.users[$val];
-		$scope.userUniv=serverId;
+$scope.openModal=function($val)
+{   
+	$scope.valShow=1;
+	$scope.avg='';
+	$scope.user=$scope.users[$val];
+	$scope.userUniv=serverId;
+	$("#btnmodal").click();
+}
+
+$scope.makeVideoCall=function($val){
+
+	$http.get('http://localhost:1337/videoCall?sip=1').success(function(res){
+		window.location.href="https://web.ciscospark.com/#/rooms/8d2596e0-0340-11e6-b0ef-05795347c21f";
+	})
+
+
+}
+$scope.makeAudioCall=function($val){
+
+	$http.get('http://localhost:1337/sendSMS?ph=14697672278&msg=Join+the+bridge+13176590432').success(function(res){
+		console.log(res);
+	})
+
+
+}
+
+$scope.one='0';$scope.two='0';
+$scope.three='0';$scope.four='0';
+
+
+
+$scope.verifyPhone=function(){
+
+	$http.get('http://localhost:1337/verifyPh?ph=14697672278').success(function(res){
 		$("#btnmodal").click();
-	}
+		$scope.verifier=true;
+	})
+}
 
-	$scope.makeVideoCall=function($val){
+$scope.showSubmit=false;
+$scope.completeVerify=function(){
+	var numCode=$scope.one+''+$scope.two+''+$scope.three+''+$scope.four;
+	$http.get('http://localhost:1337/verifySMS?codeNum='+numCode).success(function(res){
+		if(res.Code=='0'){
+			alertify.success('verification succesful');
+			$scope.showSubmit=true;
+		}
+		else{
+			alertify.error('Invalid Code');
+		}
+	})
 
-		$http.get('http://localhost:1337/videoCall?sip=1').success(function(res){
-			window.location.href="https://web.ciscospark.com/#/rooms/8d2596e0-0340-11e6-b0ef-05795347c21f";
-		})
-
-
-	}
-	$scope.makeAudioCall=function($val){
-
-		$http.get('http://localhost:1337/sendSMS?ph=14697672278&msg=Join+the+bridge+13176590432').success(function(res){
-			console.log(res);
-		})
-
-
-	}
-
+}
 
 });
