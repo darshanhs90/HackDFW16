@@ -56,17 +56,29 @@ app.controller('myCtrl',function($scope,$http) {
 	var serverId;
 	$scope.getList=function(){
 		serverId=document.getElementById('select_path').value;
-		//get list of university room names
+		var roomId='';
+		$http.get('http://localhost:1337/getRoomList').success(function(res){
+			var arr=res;
+			for (var i = 0; i <=arr.length; i++) {
+				if(arr[i].title==serverId){
+					roomId=arr[i].id;
+					break;
+				}
+			};
+			$http.get('http://localhost:1337/getListOfMembersInRoom?roomID='+roomId).success(function(res1){
+				console.log(res1);
+			})
+		})
 		//get members corresponding to a specific roomid
 
 		/*$http.get('http://localhost:1337/getAdvisors?univname='+serverId)
 			.success(function(res){
 				console.log(res);
 			});*/
-		
-		
-		window.location.href="student-index.html#work";
-	}
+
+
+window.location.href="student-index.html#work";
+}
 
 $scope.users=[];
 $scope.users.push({'phone':'14694509828','emailid':'sxn146630@utdallas.edu','id':'0','name':'Sreesha N','university':'UT Dallas','rating':'4','reviews':'I am really annoyed with your poor performance recently','img':'images/darshan.jpg'})
@@ -94,27 +106,31 @@ $scope.makeVideoCall=function($val){
 	//create room
 	//add me and other person to that room
 	//get sip of that room
-	var sipId='',Id='';
+	var sipId='';
+	var Id='';
 	$http.get('http://localhost:1337/createRoom?title=videoCall').success(function(res){
-		Id=res.id;
-		$http.get('http://localhost:1337/addPersonToRoom?roomID='+Id+'email=hsdars@gmail.com').success(function(r){
+		console.log(res);
+		Id=res[0].id;
+		$http.get('http://localhost:1337/addPersonToRoom?roomID='+Id+'&email=hsdars@gmail.com').success(function(r){
 			$http.get('http://localhost:1337/getRoomDetails?roomid='+Id).success(function(res1){
-				sipId=res1.id;
-					$http.get('http://localhost:1337/videoCall?sip='+sipId).success(function(res3){
-						window.location.href="https://web.ciscospark.com/#/rooms/8d2596e0-0340-11e6-b0ef-05795347c21f";
-					})
+				console.log(res1);
+				sipId=res1[0].sipAddress;
+				console.log(sipId);
+				$http.get('http://localhost:1337/videoCall?sip='+sipId).success(function(res3){
+					console.log(res3);
+					window.location.href="https://web.ciscospark.com/#/rooms/8d2596e0-0340-11e6-b0ef-05795347c21f";
+				});
 			})
-			})
+		})
 	})
 }
 
 $scope.makeAudioCall=function($val){
-
-	$http.get('http://localhost:1337/sendSMS?ph=14697672278&msg=Join+the+bridge+13176590432').success(function(res){
-		console.log(res);
+	$http.get('http://localhost:1337/sendSMS?ph='+$scope.users[$val].phone+'&msg=Join+the+bridge+13176590432').success(function(res){
+		$http.get('http://localhost:1337/sendSMS?ph=14697672278&msg=Join+the+bridge+13176590432').success(function(res){
+			console.log(res);
+		})
 	})
-
-
 }
 
 $scope.one='0';$scope.two='0';
@@ -124,7 +140,7 @@ $scope.three='0';$scope.four='0';
 
 $scope.verifyPhone=function(){
 
-	$http.get('http://localhost:1337/verifyPh?ph=14697672278').success(function(res){
+	$http.get('http://localhost:1337/verifyPh?ph='+$scope.phn).success(function(res){
 		$("#btnmodal").click();
 		$scope.verifier=true;
 	})
