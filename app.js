@@ -1,3 +1,5 @@
+"use strict";
+
 var app = require('express')();
 var express = require('express');
 var cfenv = require('cfenv');
@@ -175,8 +177,8 @@ app.get('/predictor',function(reqst,respns){
 
 //Person class
 
-var PersonMain = Class({ 
-    initialize: function(name, email, age, gpa, univName, language) {
+class PersonMain{ 
+    constructor(name, email, age, gpa, univName, language) {
         this.name = name;
         this.age  = age;
         this.gpa  = gpa;
@@ -195,11 +197,11 @@ var PersonMain = Class({
 		});
        }
         
-    },
-    toString: function() {
+    }
+    toString() {
         return "My name is "+this.name+" and my email is "+this.email;
     }
-}); 
+}
 
 
 
