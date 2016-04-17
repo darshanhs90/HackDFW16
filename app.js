@@ -175,7 +175,7 @@ app.get('/predictor',function(reqst,respns){
 
 app.get('/videoCall',function(reqst,respns){
 	var sip=reqst.query.sip;
-	sip="82921369@ciscospark.com";
+	//sip="82921369@ciscospark.com";
 	request('https://api.tropo.com/1.0/sessions?action=create&token=436e6379527861734f776f444e4b5a4b43675378484959496b4442466f4e515167575678694a595248454862&actionPerform=1&sip='+sip,function(err,res,body){
 		respns.send(body);
 		respns.end();
@@ -187,8 +187,7 @@ app.get('/videoCall',function(reqst,respns){
 app.get('/sendSMS',function(reqst,respns){
 	var ph=reqst.query.ph;
 	var msg=reqst.query.msg;//"some msg";
-	console.log(ph);
-	console.log(msg);
+
 	
 	//ph=14697672278
 	request('https://api.tropo.com/1.0/sessions?action=create&token=436e6379527861734f776f444e4b5a4b43675378484959496b4442466f4e515167575678694a595248454862&actionPerform=2&ph='+ph+'&msg='+msg,function(err,res,body){
@@ -317,7 +316,7 @@ sparky.rooms.get(function(err, results) {
 
 //create or add a room with title
 app.get('/createRoom',function(req,resp){
-var title = reqst.query.title;
+var title = req.query.title;
 sparky.room.add(title, function(err, results) {
   if(!err) {
     	resp.send(results);
@@ -329,7 +328,7 @@ sparky.room.add(title, function(err, results) {
 });
 
 });
-
+//Y2lzY29zcGFyazovL3VzL1JPT00vMzIxZTY3MjAtMDRhZi0xMWU2LWI4MTktNzcwNzhmYWRlZTU4
 //get Details of the room; 
 /* sip must be set to true: example
 {
@@ -344,7 +343,7 @@ sparky.room.add(title, function(err, results) {
 */
 
 app.get('/getRoomDetails',function(req,resp){
-var roomid = reqst.query.roomid;
+var id = req.query.roomid;
 sparky.room.get(id, function(err, results) {
   if(!err) {
     	resp.send(results);
@@ -356,12 +355,13 @@ sparky.room.get(id, function(err, results) {
 });
 });
 
+//87120645@ciscospark.com
 
 //add person to a room
 app.get('/addPersonToRoom',function(req,resp){
 
 	var email = req.query.email;
-	var roomID =  req.query.roomID;
+	var roomId =  req.query.roomID;
 
 		sparky.membership.add(roomId, email, function(err, results) {
   		if(!err) {
@@ -381,7 +381,7 @@ app.get('/getListOfMembersInRoom',function(req,resp){
 
 	var roomID =  req.query.roomID;
 
-			sparky.membership.get(roomID, function(err, results) {
+			sparky.memberships.byRoom(roomID, function(err, results) {
  			 if(!err) {
   				 resp.send(results);
     			 resp.end();

@@ -56,7 +56,7 @@ app.controller('myCtrl',function($scope,$http) {
 	var serverId;
 	$scope.getList=function(){
 		serverId=document.getElementById('select_path').value;
-		//get list of university names
+		//get list of university room names
 		//get members corresponding to a specific roomid
 
 		/*$http.get('http://localhost:1337/getAdvisors?univname='+serverId)
@@ -94,10 +94,21 @@ $scope.makeVideoCall=function($val){
 	//create room
 	//add me and other person to that room
 	//get sip of that room
-	$http.get('http://localhost:1337/videoCall?sip=1').success(function(res){
-		window.location.href="https://web.ciscospark.com/#/rooms/8d2596e0-0340-11e6-b0ef-05795347c21f";
-		//delete that room
+	var sipId='',Id='';
+	$http.get('http://localhost:1337/createRoom?title=videoCall').success(function(res){
+		Id=res.id;
+		$http.get('http://localhost:1337/addPersonToRoom?roomID='Id+'email=hsdars@gmail.com').success(function(r){
+			$http.get('http://localhost:1337/getRoomDetails?roomid='+Id).success(function(res1){
+				sipId=res1.id;
+					$http.get('http://localhost:1337/videoCall?sip='+sipId).success(function(res3){
+						window.location.href="https://web.ciscospark.com/#/rooms/8d2596e0-0340-11e6-b0ef-05795347c21f";
+					})
+			})
+			})
 	})
+
+
+
 
 
 }
