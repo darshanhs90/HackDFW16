@@ -147,437 +147,152 @@
 
 		<!-- One -->
 		<section id="one" class="main style2 right dark fullscreen">
-			<div class="content box style2" style="left:20px;width:1350px;background:transparent">
-				<div style="background:transparent;outline:none;" ng-hide="resume||form">
-					<span style="background:transparent;outline: none;">        <button style="left:700px;" ng-click="showResume(0)" >Upload Resume</button>            <button style="left:200px;" ng-click="showResume(1)" >Fill out your details</button>     </span>
-				</div>
+		<div class="content box style2" style="left:20px;width:1350px;background:transparent">
+			<button ng-click="showResume('0')" ng-hide="resume||form">
+				Sign Up
+			</button>
 
-				<div class="fileinput fileinput-new" data-provides="fileinput" ng-show="resume" >
-					<span class="btn btn-default btn-file" style="left:250px;" ><span>Choose file</span><input type="file" /></span>
-					<span class="fileinput-filename" ></span><span class="fileinput-new" style="left:450px;">No file chosen</span>
+			<button ng-click="showResume('1')" ng-hide="resume||form">
+				Sign In
+			</button>
+			<div ng-show="resume">
+				<form class="form-inline">
+					<div class="form-group">
+						<label for="exampleInputName2">Name</label>
+						<input type="text" class="form-control" id="exampleInputName2" placeholder="Enter Name">
+					</div>
+					<div class="form-group">
+						<label for="exampleInputEmail2">Age</label>
+						<input type="number" class="form-control" id="exampleInputEmail2" placeholder="Enter Age">
+					</div>
+				</form>
+				<form class="form-inline">
+					<div class="form-group">
+						<label for="exampleInputName2"> Email</label>
+						<input type="text" class="form-control" id="exampleInputName2" placeholder="jane.doe@example.com">
+					</div>
+					<div class="form-group">
+						<label for="exampleInputEmail2"> Password</label>
+						<input type="text" class="form-control" id="exampleInputEmail2" placeholder="********">
+					</div>
+				</form>
+				<form class="form-inline">
+					<div class="form-group">
+						<label for="exampleInputName2">University Name</label>
+						<input type="text" class="form-control" id="exampleInputName2" placeholder="Enter University Name">
+					</div>
+					<div class="form-group">
+						<label for="exampleInputEmail2"> GPA</label>
+						<input type="text" class="form-control" id="exampleInputEmail2" placeholder="Enter GPA">
+					</div>
+				</form>
 
-					<button class="btn-success has-spinner" ng-click="uploadResume()" ng-show="resume" id="bnResume" style="left:450px;" >
-						<span class="spinner"><i class="icon-spin icon-refresh"></i></span>
-						Upload and Parse Resume
-					</button>
-				</div>
-
-				<div ng-show="form" >
-
-					<form class="form-inline">
-						<h5>Personal Info</h5>
-						<div class="form-group">
-							<label for="exampleInputName2">Name</label>
-							<input type="text" class="form-control" id="exampleInputName2" placeholder="Jane Doe">
-						</div>
-						<div class="form-group">
-							<label for="exampleInputEmail2">Emailid</label>
-							<input type="email" class="form-control" id="exampleInputEmail2" placeholder="jane.doe@example.com">
-						</div>
-						<div class="form-group">
-							<label for="exampleInputEmail2">Password</label>
-							<input type="password" class="form-control" id="exampleInputEmail2" placeholder="********">
-						</div>
-					</form>
-					<form class="form-inline">
-						<h5>GRE Score</h5>
-						<div class="form-group">
-							<label for="exampleInputName2">Quantitative</label>
-							<input type="number" class="form-control" id="exampleInputName2" placeholder="130-170">
-						</div>
-						<div class="form-group">
-							<label for="exampleInputEmail2">Verbal</label>
-							<input type="number" class="form-control" id="exampleInputEmail2" placeholder="130-170">
-						</div>
-						<div class="form-group">
-							<label for="exampleInputEmail2">AWA</label>
-							<input type="number" class="form-control" id="exampleInputEmail2" placeholder="0-6">
-						</div>
-					</form>
-					<form class="form-inline">
-						<h5>Toefl Score</h5>
-						<div class="form-group">
-							<label for="exampleInputName2">Reading</label>
-							<input type="number" class="form-control" id="exampleInputName2" placeholder="0-30">
-						</div>
-						<div class="form-group">
-							<label for="exampleInputName2">Writing</label>
-							<input type="number" class="form-control" id="exampleInputName2" placeholder="0-30">
-						</div>
-						<div class="form-group">
-							<label for="exampleInputName2">Speaking</label>
-							<input type="number" class="form-control" id="exampleInputName2" placeholder="0-30">
-						</div>
-						<div class="form-group">
-							<label for="exampleInputName2">Listening</label>
-							<input type="number" class="form-control" id="exampleInputName2" placeholder="0-30">
-						</div>
-					</form>
-
-					<form class="form-inline">
-						<h5>Most Recent Education Info</h5>
-						<div class="form-group">
-							<label for="exampleInputName2">Degree</label>
-							<input type="text" class="form-control" id="exampleInputName2" placeholder="Bachelors">
-						</div>
-						<div class="form-group">
-							<label for="exampleInputName2">University</label>
-							<input type="text" class="form-control" id="exampleInputName2" placeholder="Annamma University">
-						</div>
-						<span>&nbsp;&nbsp;&nbsp;</span>
-						<div class="form-group">
-							<label for="exampleInputName2">GPA</label>
-							<input type="number" class="form-control" id="exampleInputName2" placeholder="0-4">
-						</div>
-					</form>
-					<br/>
-					<button class="btn btn-submit" ng-click="submitDetails()"> Submit Details</button>
-				</div>
-
-
+				<form class="form-inline">
+					<div class="form-group">
+						<label for="exampleInputName2">Location</label>
+						<input type="text" class="form-control" id="exampleInputName2" placeholder="Location">
+					</div>
+				</form>
+				<br/>
+				<button class="btn btn-submit" ng-click="signUp()"> Sign Up </button>
 			</div>
-			<a href="#two" class="button style2 down anchored">Next</a>
-		</section>
+
+
+			<div ng-show="form">
+				<form class="form-inline">
+					<div class="form-group">
+						<label for="exampleInputName2"> Email</label>
+						<input type="text" class="form-control" id="exampleInputName2" placeholder="jane.doe@example.com">
+					</div>
+					<div class="form-group">
+						<label for="exampleInputEmail2"> Password</label>
+						<input type="number" class="form-control" id="exampleInputEmail2" placeholder="********">
+					</div>
+				</form>
+
+				<br/>
+				<button class="btn btn-submit" ng-click="signIn()">LogIn </button>
+			</div>
+
+		</div>
+		<a href="#two" class="button style2 down anchored">Next</a>
+	</section>
 
     <!-- Two -->
     <section id="two" class="main style2 left dark fullscreen">
-        <div class="content box style2" ng-show="!vidcam">
-        	<header >
-					<h2 ng-click="showVidCam()">{{ratingText}}</h2>
-			</header>
-			<p >
-				<div>
-						<div class="star-rating"><s ng-class="getClass('0')" ><s ng-class="getClass('1')"><s ng-class="getClass('2')"><s ng-class="getClass('3')"><s ng-class="getClass('4')"></s></s></s></s></s></div>
-				</div>
-			</p>
-		</div>
-
-		<div class="content box style2" ng-show="vidcam">
-            <header >
-                <h2>Elevator's Here</h2>
-            </header>
-            <p >Talk about yourself. Sell YOUR Proposition, Passion, Goals and Future.</p>
-            <p>
-                <button id="btn-start-recording" ng-click="take_snapshot()">Start Recording</button>
-                <button id="btn-stop-recording" disabled="">Stop Recording</button>
-                <button  class="btn btn-info" ng-click="computeRating()">Compute Rating</button>
-            </p>
-        </div>
-        <div class="content style2" id="my_camera" ng-show="vidcam">
-        </div>
-        <canvas ng-show="false" id="myCanvas" width="640" height="480" style="border:1px solid #d3d3d3;" ng-show="vidcam">
-            Your browser does not support the HTML5 canvas tag.
-        </canvas>
-        <script type="text/javascript" src="recordrtc-nodejs/static/app.js"></script>
-        <script type="text/javascript" src="recordrtc-nodejs/static/src/js/RecordRTC.js"></script>
-        <script type="text/javascript" src="recordrtc-nodejs/static/src/js/FileSaver.js"></script>
-        <script type="text/javascript" src="recordrtc-nodejs/static/src/js/ctoblob.js"></script>
-        <script type="text/javascript" src="recordrtc-nodejs/static/src/js/webcam.js"></script>
-        <script language="JavaScript">
-            Webcam.set({
-                width: 640,
-                height: 480,
-                image_format: 'png',
-                jpeg_quality: 90
-            });
-            Webcam.attach('#my_camera');
-        </script>
-        <script>
-            // fetching DOM references
-            var btnStartRecording = document.querySelector('#btn-start-recording');
-            var btnStopRecording = document.querySelector('#btn-stop-recording');
-
-            var videoElement = document.querySelector('video');
-
-            // var progressBar = document.querySelector('#progress-bar');
-            // var percentage = document.querySelector('#percentage');
-        </script>
-
-        <script>
-            // global variables
-            var currentBrowser = !!navigator.mozGetUserMedia ? 'gecko' : 'chromium';
-
-            var fileName;
-            var audioRecorder;
-            var videoRecorder;
-
-            // Firefox can record both audio/video in single webm container
-            // Don't need to create multiple instances of the RecordRTC for Firefox
-            // You can even use below property to force recording only audio blob on chrome
-            // var isRecordOnlyAudio = true;
-            var isRecordOnlyAudio = !!navigator.mozGetUserMedia;
-
-            // if recording only audio, we should replace "HTMLVideoElement" with "HTMLAudioElement"
-            if (isRecordOnlyAudio && currentBrowser == 'chromium') {
-                var parentNode = videoElement.parentNode;
-                parentNode.removeChild(videoElement);
-
-                videoElement = document.createElement('audio');
-                videoElement.style.padding = '.4em';
-                videoElement.controls = true;
-                parentNode.appendChild(videoElement);
-            }
-        </script>
-
-        <script>
-            // reusable helpers
-
-            // this function submits both audio/video or single recorded blob to nodejs server
-            function postFiles(audio, video) {
-                // getting unique identifier for the file name
-                //fileName = generateRandomString();
-                fileName = "Test";
-                // this object is used to allow submitting multiple recorded blobs
-                var files = {};
-
-                // recorded audio blob
-                files.audio = {
-                    name: fileName + '.' + audio.blob.type.split('/')[1],
-                    type: audio.blob.type,
-                    contents: audio.dataURL
-                };
-
-                if (video) {
-                    files.video = {
-                        name: fileName + '.' + video.blob.type.split('/')[1],
-                        type: video.blob.type,
-                        contents: video.dataURL
-                    };
-                }
-
-                files.uploadOnlyAudio = !video;
-
-                videoElement.src = '';
-                videoElement.poster = 'recordrtc-nodejs/static/ajax-loader.gif';
-
-                xhr('http://localhost:8000/upload', JSON.stringify(files), function(_fileName) {
-                    var href = location.href.substr(0, location.href.lastIndexOf('/') + 1);
-                    videoElement.src = href + 'recordrtc-nodejs/uploads/' + _fileName;
-                    videoElement.play();
-                    videoElement.muted = false;
-                    videoElement.controls = true;
-
-                    var h2 = document.createElement('h2');
-                    h2.innerHTML = '<a href="' + videoElement.src + '">' + videoElement.src + '</a>';
-                    document.body.appendChild(h2);
-                });
-
-                if (mediaStream) mediaStream.stop();
-            }
-
-            // XHR2/FormData
-            function xhr(url, data, callback) {
-                var request = new XMLHttpRequest();
-                request.onreadystatechange = function() {
-                    if (request.readyState == 4 && request.status == 200) {
-                        callback(request.responseText);
-                    }
-                };
-
-                // request.upload.onprogress = function(event) {
-                //     progressBar.max = event.total;
-                //     progressBar.value = event.loaded;
-                //     progressBar.innerHTML = 'Upload Progress ' + Math.round(event.loaded / event.total * 100) + "%";
-                // };
-
-                // request.upload.onload = function() {
-                //     percentage.style.display = 'none';
-                //     progressBar.style.display = 'none';
-                // };
-                request.open('POST', url);
-                request.send(data);
-            }
-
-            // generating random string
-            // function generateRandomString() {
-            //     if (window.crypto) {
-            //         var a = window.crypto.getRandomValues(new Uint32Array(3)),
-            //             token = '';
-            //         for (var i = 0, l = a.length; i < l; i++) token += a[i].toString(36);
-            //         return token;
-            //     } else {
-            //         return (Math.random() * new Date().getTime()).toString(36).replace(/\./g, '');
-            //     }
-            // }
-
-            // when btnStopRecording is clicked
-            function onStopRecording() {
-                audioRecorder.getDataURL(function(audioDataURL) {
-                    var audio = {
-                        blob: audioRecorder.getBlob(),
-                        dataURL: audioDataURL
-                    };
-                    console.log(audio);
-                    // if record both wav and webm
-                    if (!isRecordOnlyAudio) {
-                        videoRecorder.getDataURL(function(videoDataURL) {
-                            var video = {
-                                blob: videoRecorder.getBlob(),
-                                dataURL: videoDataURL
-                            };
-                            
-                            postFiles(audio, video);
-                        });
-                    }
-
-                    // if record only audio (either wav or ogg)
-                    if (isRecordOnlyAudio) postFiles(audio);
-                });
-            }
-        </script>
-
-        <script>
-            var mediaStream = null;
-            // reusable getUserMedia
-            function captureUserMedia(success_callback) {
-                var session = {
-                    audio: true,
-                    video: true
-                };
-
-                navigator.getUserMedia(session, success_callback, function(error) {
-                    alert(JSON.stringify(error));
-                });
-            }
-        </script>
-
-        <script>
-            // UI events handling
-            btnStartRecording.onclick = function() {
-                //take_snapshot();
-                btnStartRecording.disabled = true;
-
-                captureUserMedia(function(stream) {
-                    mediaStream = stream;
-
-                    videoElement.src = window.URL.createObjectURL(stream);
-                    videoElement.play();
-                    videoElement.muted = false;
-                    videoElement.controls = false;
-
-                    // it is second parameter of the RecordRTC
-                    var audioConfig = {};
-                    if (!isRecordOnlyAudio) {
-                        audioConfig.onAudioProcessStarted = function() {
-                            // invoke video recorder in this callback
-                            // to get maximum sync
-                            videoRecorder.startRecording();
-                        };
-                    }
-
-                    audioRecorder = RecordRTC(stream, audioConfig);
-
-                    if (!isRecordOnlyAudio) {
-                        // it is second parameter of the RecordRTC
-                        var videoConfig = {
-                            type: 'video'
-                        };
-                        videoRecorder = RecordRTC(stream, videoConfig);
-                    }
-
-                    audioRecorder.startRecording();
-
-                    // enable stop-recording button
-                    btnStopRecording.disabled = false;
-                });
-            };
-
-
-            btnStopRecording.onclick = function() {
-                btnStartRecording.disabled = false;
-                btnStopRecording.disabled = true;
-                if (isRecordOnlyAudio) {
-                    audioRecorder.stopRecording(onStopRecording);
-                }
-
-                if (!isRecordOnlyAudio) {
-                    audioRecorder.stopRecording(function() {
-                        videoRecorder.stopRecording(function() {
-                            onStopRecording();
-                        });
-                    });
-                }
-            };
-        </script>
-
-        <script>
-            window.onbeforeunload = function() {
-                startRecording.disabled = false;
-            };
-        </script>
-        <a href="#work" class="button style2 down anchored">Next</a>
+        
     </section>
 
 
 
 
-			<!-- Work -->
-			<section id="work" class="main style3 primary">
-				<div class="content container">
-					<header>
-						<h2>Students List</h2>
-						</header>
+	<!-- Work -->
+	<!--<section id="work" class="main style3 primary">
+		<div class="content container">
+			<header>
+				<h2>Students List</h2>
+			</header>
 
-						<!-- Lightbox Gallery  -->
-						<div class="container 75% gallery">
-							<div class="row 0% images ">
-								<div class="6u 12u(mobile)">
-									<div class="image fit from-left divbutton" style="background-image:url('images/thumbs/01.jpg');height:250px;width:435px;">
-									<button style="display:none;"><i class="fa fa-video-camera"></i></button>
-									<button style="display:none;"><i class="fa fa-phone"></i></button>
-									<div class="star-rating" style="display:none;"><s class="rated"><s class="rated"><s class="rated"><s class="rated"><s ></s></s></s></s></s></div>
-									<button style="display:none;"><i class="fa fa-user"></i></button>
-									</div>
-								</div>
-								<div class="6u 12u(mobile)">
-									<div class="image fit from-right divbutton" style="background-image:url('images/thumbs/02.jpg');height:250px;width:435px;">
-										<button style="display:none;"><i class="fa fa-video-camera"></i></button>
-									<button style="display:none;"><i class="fa fa-phone"></i></button>
-									<div class="star-rating" style="display:none;"><s class="rated"><s class="rated"><s class="rated"><s class=""><s ></s></s></s></s></s></div>
-									<button style="display:none;"><i class="fa fa-user"></i></button>
-									</div>
-								</div>
-							</div>
-							<div class="row 0% images ">
-								<div class="6u 12u(mobile)">
-									<div class="image fit from-left divbutton" style="background-image:url('images/thumbs/03.jpg');height:250px;width:435px;">
-									<button style="display:none;"><i class="fa fa-video-camera"></i></button>
-									<button style="display:none;"><i class="fa fa-phone"></i></button>
-									<div class="star-rating" style="display:none;"><s class="rated"><s class="rated"><s class="rated"><s class="rated"><s class="rated"></s></s></s></s></s></div>
-									<button style="display:none;"><i class="fa fa-user"></i></button>
-									</div>
-								</div>
-								<div class="6u 12u(mobile)">
-									<div class="image fit from-right divbutton" style="background-image:url('images/thumbs/04.jpg');height:250px;width:435px;">
-									<button style="display:none;"><i class="fa fa-video-camera"></i></button>
-									<button style="display:none;"><i class="fa fa-phone"></i></button>
-									<div class="star-rating" style="display:none;"><s class="rated"><s class="rated"><s class=""><s class=""><s ></s></s></s></s></s></div>
-									<button style="display:none;"><i class="fa fa-user"></i></button>
-									</div>
-								</div>
-							</div>
-							<div class="row 0% images ">
-								<div class="6u 12u(mobile)">
-									<div class="image fit from-left divbutton" style="background-image:url('images/thumbs/05.jpg');height:250px;width:435px;">
-									<button style="display:none;"><i class="fa fa-video-camera"></i></button>
-									<button style="display:none;"><i class="fa fa-phone"></i></button>
-									<div class="star-rating" style="display:none;"><s class="rated"><s class="rated"><s class="rated"><s class="rated"><s class='rated'></s></s></s></s></s></div>
-									<button style="display:none;"><i class="fa fa-user"></i></button>
-									</div>
-								</div>
-								<div class="6u 12u(mobile)">
-									<div class="image fit from-right divbutton" style="background-image:url('images/thumbs/06.jpg');height:250px;width:435px;">
-									<button style="display:none;"><i class="fa fa-video-camera"></i></button>
-									<button style="display:none;"><i class="fa fa-phone"></i></button>
-									<div class="star-rating" style="display:none;"><s class="rated"><s class="rated"><s class="rated"><s class="rated"><s ></s></s></s></s></s></div>
-									<button style="display:none;"><i class="fa fa-user"></i></button>
-									</div>
-								</div>
-							</div>
+			
+			<div class="container 75% gallery">
+				<div class="row 0% images ">
+					<div class="6u 12u(mobile)">
+						<div class="image fit from-left divbutton" style="background-image:url('images/thumbs/01.jpg');height:250px;width:435px;">
+						<button style="display:none;"><i class="fa fa-video-camera"></i></button>
+						<button style="display:none;"><i class="fa fa-phone"></i></button>
+						<div class="star-rating" style="display:none;"><s class="rated"><s class="rated"><s class="rated"><s class="rated"><s ></s></s></s></s></s></div>
+						<button style="display:none;"><i class="fa fa-user"></i></button>
 						</div>
-
 					</div>
-				</section>
+					<div class="6u 12u(mobile)">
+						<div class="image fit from-right divbutton" style="background-image:url('images/thumbs/02.jpg');height:250px;width:435px;">
+							<button style="display:none;"><i class="fa fa-video-camera"></i></button>
+						<button style="display:none;"><i class="fa fa-phone"></i></button>
+						<div class="star-rating" style="display:none;"><s class="rated"><s class="rated"><s class="rated"><s class=""><s ></s></s></s></s></s></div>
+						<button style="display:none;"><i class="fa fa-user"></i></button>
+						</div>
+					</div>
+				</div>
+				<div class="row 0% images ">
+					<div class="6u 12u(mobile)">
+						<div class="image fit from-left divbutton" style="background-image:url('images/thumbs/03.jpg');height:250px;width:435px;">
+						<button style="display:none;"><i class="fa fa-video-camera"></i></button>
+						<button style="display:none;"><i class="fa fa-phone"></i></button>
+						<div class="star-rating" style="display:none;"><s class="rated"><s class="rated"><s class="rated"><s class="rated"><s class="rated"></s></s></s></s></s></div>
+						<button style="display:none;"><i class="fa fa-user"></i></button>
+						</div>
+					</div>
+					<div class="6u 12u(mobile)">
+						<div class="image fit from-right divbutton" style="background-image:url('images/thumbs/04.jpg');height:250px;width:435px;">
+						<button style="display:none;"><i class="fa fa-video-camera"></i></button>
+						<button style="display:none;"><i class="fa fa-phone"></i></button>
+						<div class="star-rating" style="display:none;"><s class="rated"><s class="rated"><s class=""><s class=""><s ></s></s></s></s></s></div>
+						<button style="display:none;"><i class="fa fa-user"></i></button>
+						</div>
+					</div>
+				</div>
+				<div class="row 0% images ">
+					<div class="6u 12u(mobile)">
+						<div class="image fit from-left divbutton" style="background-image:url('images/thumbs/05.jpg');height:250px;width:435px;">
+						<button style="display:none;"><i class="fa fa-video-camera"></i></button>
+						<button style="display:none;"><i class="fa fa-phone"></i></button>
+						<div class="star-rating" style="display:none;"><s class="rated"><s class="rated"><s class="rated"><s class="rated"><s class='rated'></s></s></s></s></s></div>
+						<button style="display:none;"><i class="fa fa-user"></i></button>
+						</div>
+					</div>
+					<div class="6u 12u(mobile)">
+						<div class="image fit from-right divbutton" style="background-image:url('images/thumbs/06.jpg');height:250px;width:435px;">
+						<button style="display:none;"><i class="fa fa-video-camera"></i></button>
+						<button style="display:none;"><i class="fa fa-phone"></i></button>
+						<div class="star-rating" style="display:none;"><s class="rated"><s class="rated"><s class="rated"><s class="rated"><s ></s></s></s></s></s></div>
+						<button style="display:none;"><i class="fa fa-user"></i></button>
+						</div>
+					</div>
+				</div>
+			</div>
+
+		</div>
+	</section>-->
 
 				<!-- Contact -->
 				<section id="contact" class="main style3 secondary">
