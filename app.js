@@ -256,3 +256,6 @@ sparky.membership.add(roomId, email, function(err, results) {
   }
 });
 
+}
+
+
