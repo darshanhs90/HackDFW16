@@ -56,7 +56,19 @@ app.controller('myCtrl',function($scope,$http) {
 	var serverId;
 	$scope.getList=function(){
 		serverId=document.getElementById('select_path').value;
-		//get list of university room names
+		var roomId='';
+		$http.get('http://localhost:1337/getRoomList').success(function(res){
+			var arr=res;
+			for (var i = 0; i <=arr.length; i++) {
+				if(arr[i].title==serverId){
+					roomId=arr[i].id;
+					break;
+				}
+			};
+			$http.get('http://localhost:1337/getListOfMembersInRoom?roomID='+roomId).success(function(res1){
+				console.log(res1);
+			})
+		})
 		//get members corresponding to a specific roomid
 
 		/*$http.get('http://localhost:1337/getAdvisors?univname='+serverId)
@@ -127,7 +139,7 @@ $scope.three='0';$scope.four='0';
 
 $scope.verifyPhone=function(){
 
-	$http.get('http://localhost:1337/verifyPh?ph=14697672278').success(function(res){
+	$http.get('http://localhost:1337/verifyPh?ph='+$scope.phn).success(function(res){
 		$("#btnmodal").click();
 		$scope.verifier=true;
 	})
