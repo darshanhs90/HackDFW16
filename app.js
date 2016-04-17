@@ -301,8 +301,63 @@ app.get('/getUserByEmail',function(req,resp){
 
 });
 
-//add person to a room
+//get list of all rooms
+app.get('/getRoomList',function(req,resp){
+sparky.rooms.get(function(err, results) {
+  if(!err) {
+    	resp.send(results);
+    	resp.end();
+  		}
+  		else{
+  			console.log(err);
+  		}
+});
 
+});
+
+//create or add a room with title
+app.get('/createRoom',function(req,resp){
+var title = reqst.query.title;
+sparky.room.add(title, function(err, results) {
+  if(!err) {
+    	resp.send(results);
+    	resp.end();
+  		}
+  		else{
+  			console.log(err);
+  		}
+});
+
+});
+
+//get Details of the room; 
+/* sip must be set to true: example
+{
+	"id": "Y2lzY29zcGFyazovL3VzL1JPT00vNjA0NDcwMTAtMDRhZC0xMWU2LWEwZWQtYzc4MmRiNGY2ODVh",
+	"title": "NIKHIL TEMP",
+	"type": "group",
+	"isLocked": false,
+	"sipAddress": "81342662@ciscospark.com",
+	"lastActivity": "2016-04-17T15:02:17.233Z",
+	"created": "2016-04-17T15:02:17.233Z"
+}
+*/
+
+app.get('/getRoomDetails',function(req,resp){
+var roomid = reqst.query.roomid;
+sparky.room.get(id, function(err, results) {
+  if(!err) {
+    	resp.send(results);
+    	resp.end();
+  		}
+  		else{
+  			console.log(err);
+  		}
+});
+});
+
+
+//add person to a room
 app.get('/addPersonToRoom',function(req,resp){
 
 	var email = req.query.email;
