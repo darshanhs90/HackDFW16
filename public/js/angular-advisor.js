@@ -90,7 +90,7 @@ app.controller('myCtrl',function($scope,$http) {
 	
 	$scope.verifyPhone=function(){
 
-		$http.get('http://localhost:1337/verifyPh?ph=14697672278').success(function(res){
+		$http.get('http://localhost:1337/verifyPh?ph='+$scope.phn).success(function(res){
 			$scope.valShow=1;
 			$("#btnmodal").click();
 			$scope.verifier=true;
