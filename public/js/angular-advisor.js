@@ -3,6 +3,7 @@ app.controller('myCtrl',function($scope,$http) {
 	$scope.resume=false;
 	$scope.form=false;
 	$scope.vidcam=false;
+	$scope.verifier=false;
 	$scope.ratingText="Get Your Rating";
 	$scope.showVidCam=function(){
 		$scope.vidcam=true;
@@ -83,7 +84,33 @@ app.controller('myCtrl',function($scope,$http) {
 			});
 		}
 
+	$scope.one='0';$scope.two='0';
+	$scope.three='0';$scope.four='0';
 
+	
+	$scope.verifyPhone=function(){
+
+		$http.get('http://localhost:1337/verifyPh?ph=14697672278').success(function(res){
+			$scope.valShow=1;
+			$("#btnmodal").click();
+			$scope.verifier=true;
+		})
+	}
+
+	$scope.showSubmit=false;
+	$scope.completeVerify=function(){
+		var numCode=$scope.one+''+$scope.two+''+$scope.three+''+$scope.four;
+		$http.get('http://localhost:1337/verifySMS?codeNum='+numCode).success(function(res){
+			if(res.Code=='0'){
+				alertify.success('verification succesful');
+				$scope.showSubmit=true;
+			}
+			else{
+				alertify.error('Invalid Code');
+			}
+		})
+
+	}
 	/*$("div.star-rating > s, div.star-rating-rtl > s").on("click", function(e) {
 		var numStars = $(e.target).parentsUntil("div").length+1;
 		alert(numStars + (numStars == 1 ? " star" : " stars!"));
