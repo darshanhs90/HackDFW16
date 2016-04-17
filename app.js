@@ -176,9 +176,7 @@ app.get('/predictor',function(reqst,respns){
 var collegenames=["The University of Texas at Austin",
 	"The University of Texas at Dallas",
 	"The University of Texas at Arlington",
-	"University of California-Berkeley",
-	"University of Colorado Boulder",
-	"Virginia Polytechnic Institute and State University"];
+	"University of California-Berkeley"];
 
 //add rooms
 collegenames.forEach(function(coll){

@@ -42,9 +42,7 @@ app.controller('myCtrl',function($scope,$http) {
 	$scope.collegenames=["The University of Texas at Austin",
 	"The University of Texas at Dallas",
 	"The University of Texas at Arlington",
-	"University of California-Berkeley",
-	"University of Colorado Boulder",
-	"Virginia Polytechnic Institute and State University"];
+	"University of California-Berkeley"];
 
 	$(document).on('mouseenter', '.divbutton', function () {
 		$(this).find(":button").show();
@@ -56,7 +54,40 @@ app.controller('myCtrl',function($scope,$http) {
 	var serverId;
 	$scope.getList=function(){
 		serverId=document.getElementById('select_path').value;
-
+		switch(serverId){
+			case "The University of Texas at Austin":$scope.users=[];
+$scope.users.push({'emailid':'','id':'0','emailid':'sxn146630@utdallas.edu','image':'images/sreesha.jpg','name':'Sreesha N','university':'UT Dallas','rating':'4','reviews':'I am really annoyed with your poor performance recently','img':'images/darshan.jpg'})
+$scope.users.push({'emailid':'','id':'1','emailid':'hsdars@gmail.com','image':'images/darshan.jpg','name':'Darshan HS','university':'UT Dallas','rating':'3','reviews':'Hey, good job with that thing you did recently','img':'images/newone.jpg'})
+$scope.users.push({'emailid':'','id':'2','emailid':'sxn146630@utdallas.edu','image':'images/bhargavi.jpg','name':'Bhargavi R','university':'UT Dallas','rating':'5','reviews':'I am really annoyed with your poor performance recently','img':'images/sreesha.jpg'})
+$scope.users.push({'emailid':'','id':'3','emailid':'sxn146630@utdallas.edu','image':'images/shivu.jpg','name':'Shivu G','university':'UT Dallas','rating':'2','reviews':'Hey, good job with that thing you did recently','img':'images/newone2.jpg'})
+$scope.users.push({'emailid':'','id':'4','emailid':'sxn146630@utdallas.edu','image':'images/newone.jpg','name':'Ritu P','university':'UT Dallas','rating':'5','reviews':'I am really annoyed with your poor performance recently','img':'images/shivu.jpg'})
+$scope.users.push({'emailid':'','id':'5','emailid':'sxn146630@utdallas.edu','image':'images/newone2.jpg','name':'NoName','university':'UT Dallas','rating':'4','reviews':'Hey, good job with that thing you did recently','img':'images/bhargavi.jpg'})
+break;
+			case "The University of Texas at Dallas":$scope.users=[];
+$scope.users.push({'emailid':'','id':'0','emailid':'sxn146630@utdallas.edu','image':'images/newone.jpg','name':'Sreesha N','university':'UT Dallas','rating':'4','reviews':'I am really annoyed with your poor performance recently','img':'images/darshan.jpg'})
+$scope.users.push({'emailid':'','id':'1','emailid':'hsdars@gmail.com','image':'images/newone2.jpg','name':'Darshan HS','university':'UT Dallas','rating':'3','reviews':'Hey, good job with that thing you did recently','img':'images/newone.jpg'})
+$scope.users.push({'emailid':'','id':'2','emailid':'sxn146630@utdallas.edu','image':'images/bhargavi.jpg','name':'Bhargavi R','university':'UT Dallas','rating':'5','reviews':'I am really annoyed with your poor performance recently','img':'images/sreesha.jpg'})
+$scope.users.push({'emailid':'','id':'3','emailid':'sxn146630@utdallas.edu','image':'images/shivu.jpg','name':'Shivu G','university':'UT Dallas','rating':'2','reviews':'Hey, good job with that thing you did recently','img':'images/newone2.jpg'})
+$scope.users.push({'emailid':'','id':'4','emailid':'sxn146630@utdallas.edu','image':'images/sreesha.jpg','name':'Ritu P','university':'UT Dallas','rating':'5','reviews':'I am really annoyed with your poor performance recently','img':'images/shivu.jpg'})
+$scope.users.push({'emailid':'','id':'5','emailid':'sxn146630@utdallas.edu','image':'images/darshan.jpg','name':'NoName','university':'UT Dallas','rating':'4','reviews':'Hey, good job with that thing you did recently','img':'images/bhargavi.jpg'})
+break;
+			case "The University of Texas at Arlington":$scope.users=[];
+$scope.users.push({'emailid':'','id':'0','emailid':'sxn146630@utdallas.edu','image':'images/bhargavi.jpg','name':'Sreesha N','university':'UT Dallas','rating':'4','reviews':'I am really annoyed with your poor performance recently','img':'images/darshan.jpg'})
+$scope.users.push({'emailid':'','id':'1','emailid':'hsdars@gmail.com','image':'images/nikhil.jpg','name':'Darshan HS','university':'UT Dallas','rating':'3','reviews':'Hey, good job with that thing you did recently','img':'images/newone.jpg'})
+$scope.users.push({'emailid':'','id':'2','emailid':'sxn146630@utdallas.edu','image':'images/prajwal.jpg','name':'Bhargavi R','university':'UT Dallas','rating':'5','reviews':'I am really annoyed with your poor performance recently','img':'images/sreesha.jpg'})
+$scope.users.push({'emailid':'','id':'3','emailid':'sxn146630@utdallas.edu','image':'images/shivu.jpg','name':'Shivu G','university':'UT Dallas','rating':'2','reviews':'Hey, good job with that thing you did recently','img':'images/newone2.jpg'})
+$scope.users.push({'emailid':'','id':'4','emailid':'sxn146630@utdallas.edu','image':'images/newone.jpg','name':'Ritu P','university':'UT Dallas','rating':'5','reviews':'I am really annoyed with your poor performance recently','img':'images/shivu.jpg'})
+$scope.users.push({'emailid':'','id':'5','emailid':'sxn146630@utdallas.edu','image':'images/newone2.jpg','name':'NoName','university':'UT Dallas','rating':'4','reviews':'Hey, good job with that thing you did recently','img':'images/bhargavi.jpg'})
+break;
+			case "University of California-Berkeley":$scope.users=[];
+$scope.users.push({'emailid':'','id':'0','emailid':'sxn146630@utdallas.edu','image':'images/arvind.jpg','name':'Sreesha N','university':'UT Dallas','rating':'4','reviews':'I am really annoyed with your poor performance recently','img':'images/darshan.jpg'})
+$scope.users.push({'emailid':'','id':'1','emailid':'hsdars@gmail.com','image':'images/naga.jpg','name':'Darshan HS','university':'UT Dallas','rating':'3','reviews':'Hey, good job with that thing you did recently','img':'images/newone.jpg'})
+$scope.users.push({'emailid':'','id':'2','emailid':'sxn146630@utdallas.edu','image':'images/darshan.jpg','name':'Bhargavi R','university':'UT Dallas','rating':'5','reviews':'I am really annoyed with your poor performance recently','img':'images/sreesha.jpg'})
+$scope.users.push({'emailid':'','id':'3','emailid':'sxn146630@utdallas.edu','image':'images/sreesha.jpg','name':'Shivu G','university':'UT Dallas','rating':'2','reviews':'Hey, good job with that thing you did recently','img':'images/newone2.jpg'})
+$scope.users.push({'emailid':'','id':'4','emailid':'sxn146630@utdallas.edu','image':'images/newone.jpg','name':'Ritu P','university':'UT Dallas','rating':'5','reviews':'I am really annoyed with your poor performance recently','img':'images/shivu.jpg'})
+$scope.users.push({'emailid':'','id':'5','emailid':'sxn146630@utdallas.edu','image':'images/newone2.jpg','name':'NoName','university':'UT Dallas','rating':'4','reviews':'Hey, good job with that thing you did recently','img':'images/bhargavi.jpg'})
+break;
+		}
 
 		var roomId='';
 		$http.get('http://localhost:1337/getRoomList').success(function(res){
