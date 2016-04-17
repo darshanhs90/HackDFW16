@@ -63,10 +63,10 @@ app.controller('myCtrl',function($scope,$http) {
 			.success(function(res){
 				console.log(res);
 			});*/
-		
-		
-		window.location.href="student-index.html#work";
-	}
+
+
+window.location.href="student-index.html#work";
+}
 
 $scope.users=[];
 $scope.users.push({'emailid':'','id':'0','name':'Sreesha N','university':'UT Dallas','rating':'4','reviews':'I am really annoyed with your poor performance recently','img':'images/darshan.jpg'})
@@ -94,31 +94,30 @@ $scope.makeVideoCall=function($val){
 	//create room
 	//add me and other person to that room
 	//get sip of that room
-	var sipId='',Id='';
+	var sipId='';
+	var Id='';
 	$http.get('http://localhost:1337/createRoom?title=videoCall').success(function(res){
-		Id=res.id;
-		$http.get('http://localhost:1337/addPersonToRoom?roomID='Id+'email=hsdars@gmail.com').success(function(r){
+		console.log(res);
+		Id=res[0].id;
+		$http.get('http://localhost:1337/addPersonToRoom?roomID='+Id+'&email=hsdars@gmail.com').success(function(r){
 			$http.get('http://localhost:1337/getRoomDetails?roomid='+Id).success(function(res1){
-				sipId=res1.id;
-					$http.get('http://localhost:1337/videoCall?sip='+sipId).success(function(res3){
-						window.location.href="https://web.ciscospark.com/#/rooms/8d2596e0-0340-11e6-b0ef-05795347c21f";
-					})
+				console.log(res1);
+				sipId=res1[0].sipAddress;
+				console.log(sipId);
+				$http.get('http://localhost:1337/videoCall?sip='+sipId).success(function(res3){
+					console.log(res3);
+					window.location.href="https://web.ciscospark.com/#/rooms/8d2596e0-0340-11e6-b0ef-05795347c21f";
+				});
 			})
-			})
+		})
 	})
-
-
-
-
-
 }
 $scope.makeAudioCall=function($val){
-
-	$http.get('http://localhost:1337/sendSMS?ph=14697672278&msg=Join+the+bridge+13176590432').success(function(res){
-		console.log(res);
+	$http.get('http://localhost:1337/sendSMS?ph='+$scope.users[$val].phone+'&msg=Join+the+bridge+13176590432').success(function(res){
+		$http.get('http://localhost:1337/sendSMS?ph=14697672278&msg=Join+the+bridge+13176590432').success(function(res){
+			console.log(res);
+		})
 	})
-
-
 }
 
 $scope.one='0';$scope.two='0';
