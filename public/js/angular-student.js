@@ -60,8 +60,10 @@ app.controller('myCtrl',function($scope,$http) {
 			.success(function(res){
 				console.log(res);
 			});*/
-window.location.href="student-index.html#work";
-}
+		
+		
+		window.location.href="student-index.html#work";
+	}
 
 $scope.users=[];
 $scope.users.push({'id':'0','name':'Sreesha N','university':'UT Dallas','rating':'4','reviews':'I am really annoyed with your poor performance recently','img':'images/darshan.jpg'})
