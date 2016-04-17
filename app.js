@@ -10,6 +10,9 @@ app.use(cors());
 app.use(express.static(__dirname + '/public'));
 app.use(bodyParser.json());
 
+var Sparky = require('node-sparky');
+var sparky = new Sparky({ token: 'NmJkMjA1NGItMDQxOS00ODQ0LThlZDQtOTkzNGYxYTllMGFlMjJmNTkwYzYtOTBm' });
+
 var parseString = require('xml2js').parseString;
 
 var hod = require('havenondemand');
@@ -212,4 +215,44 @@ app.get('/verifySMS',function(reqst,respns){
 	}
 });
 
+// sparky contents
+
+ //list rooms
+sparky.rooms.get(function(err, results) {
+  if(!err) console.log(results);
+});
+ 
+
+var listColl= [
+	"Armstrong Atlantic State University",
+	"Art Academy of Cincinnati",
+	"Art Center College of Design",
+	"ASA College",
+	"Asbury Theological Seminary"];
+
+var collArr=['true','true','true','true'];
+
+//add rooms
+var index=0;
+listColl.forEach(function(coll){
+	if(!collArr[index]){
+ 		sparky.room.add(coll, function(err, results) {
+  			if(!err) {
+    			console.log(results);
+  			}
+		});	
+ 	}
+ 	index++;
+});
+
+
+//add person in a room by email
+
+function addPersonToRoom(roomId,email){
+
+sparky.membership.add(roomId, email, function(err, results) {
+  if(!err) {
+    console.log(results);
+  }
+});
 
